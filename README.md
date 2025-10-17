@@ -26,7 +26,7 @@ This uses airflow to run the pipelines.
 
 1. **Clone**
    ```bash
-   git clone https://github.com/saharsh-solanki/sde2_task.git
+   git clone https://github.com/saharsh-solanki/task_sde2.git
    cd sde2_task
    ```
 2. **Setup project**

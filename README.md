@@ -310,7 +310,6 @@ echo "asin,week,units_sold,gmv,refunds
 TEST-001,1,50,2500,100
 TEST-002,1,25,1250,50" > inputs/sales/sde2_sales.csv
 ```  
-3. **Home & Kitchen** - Coffee makers, knife sets, air purifiers
 
 **Last Updated**: October 16, 2025  
 **Status**: Production Ready

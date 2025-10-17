@@ -65,12 +65,13 @@ If you prefer manual setup:
    ```
 
 4. **Start services:**
+5. <br/>
    Before start the services please make sure your docker daemon is running.
    ```bash
    sudo docker compose up -d
    ```
 
-5. **Wait for initialization (~2 minutes)**
+6. **Wait for initialization (~2 minutes)**
 
 ## How to Run
 
@@ -164,7 +165,7 @@ SDE2_TASK/
 │   │   └── merged_data.json
 │   └── insights_files/
 │       ├── top_issues_based_on_reviews.json
-│       └── top_return_issues_with_suggestions.json
+│       └── top_issues_based_on_returns.json
 ├── pipelines/
 │   ├── analysis_pipelines/
 │   │   ├── __pycache__/
@@ -215,7 +216,7 @@ SDE2_TASK/
 - Map return reasons to suggestions
 - Generate insights with actionable recommendations
 
-**Output**: `outputs/insights_files/top_return_issues_with_suggestions.json`
+**Output**: `outputs/insights_files/top_issues_based_on_returns.json`
 
 **Dependencies**: Requires `data_pipeline` to complete first
 
@@ -289,7 +290,7 @@ ASIN-1001,1,50,2500,100
 4. **Check results**:
    ```bash
    cat outputs/ingestion_files/merged_data.json
-   cat outputs/insights_files/top_return_issues_with_suggestions.json
+   cat outputs/insights_files/top_issues_based_on_returns.json
    cat outputs/insights_files/top_issues_based_on_reviews.json
    ```
 
@@ -299,15 +300,15 @@ ASIN-1001,1,50,2500,100
 # Create minimal test data
 echo "asin,review_text,rating
 TEST-001,Great product,5
-TEST-002,Poor quality,2" > inputs/sde2_reviews.csv
+TEST-002,Poor quality,2" > inputs/reviews/sde2_reviews.csv
 
 echo "asin,return_reason,count
 TEST-001,Defective product,2
-TEST-002,Late delivery,1" > inputs/sde2_returns.csv
+TEST-002,Late delivery,1" >inputs/returns/sde2_returns.csv
 
 echo "asin,week,units_sold,gmv,refunds
 TEST-001,1,50,2500,100
-TEST-002,1,25,1250,50" > inputs/sde2_sales.csv
+TEST-002,1,25,1250,50" > inputs/sales/sde2_sales.csv
 ```  
 3. **Home & Kitchen** - Coffee makers, knife sets, air purifiers
 

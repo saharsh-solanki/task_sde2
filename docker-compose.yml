@@ -1,0 +1,75 @@
+
+x-airflow-common:
+  &airflow-common
+  image: apache/airflow:2.8.1
+  environment:
+    &airflow-env
+    AIRFLOW__CORE__EXECUTOR: SequentialExecutor
+    AIRFLOW__CORE__LOAD_EXAMPLES: "False"
+    AIRFLOW__CORE__DAGS_FOLDER: /opt/airflow/pipelines  
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: sqlite:////opt/airflow/db/airflow.db
+    AIRFLOW__WEBSERVER__SECRET_KEY: '4e9f8b2c7d1a9f2d3e7c4b5a6f8d9e0c3b1a7d5e6f8c9a0b1c2d3e4f5a6b7c8d'
+    AIRFLOW__LOGGING__REMOTE_LOGGING: "False"
+    AIRFLOW__LOGGING__LOG_LEVEL: "INFO"
+    AIRFLOW__LOGGING__BASE_LOG_FOLDER: "/opt/airflow/airflow_logs"
+    AIRFLOW__LOGGING__DAG_PROCESSOR_MANAGER_LOG_LOCATION: "/opt/airflow/airflow_logs/dag_processor_manager/dag_processor_manager.log"
+    TZ: "Asia/Kolkata"
+    PYTHONPATH: /opt/airflow
+  volumes:
+    - ./pipelines:/opt/airflow/pipelines
+    - ./inputs/returns:/opt/airflow/inputs/returns
+    - ./inputs/reviews:/opt/airflow/inputs/reviews
+    - ./inputs/sales:/opt/airflow/inputs/sales
+    - ./outputs:/opt/airflow/outputs
+    - ./logs:/opt/airflow/logs
+    - ./utils:/opt/airflow/utils
+    - ./configs:/opt/airflow/configs
+    - ./airflow_logs:/opt/airflow/airflow_logs
+    - ./pipelines/db:/opt/airflow/db
+    - ./suggestion_mappings:/opt/airflow/suggestion_mappings
+  user: "${AIRFLOW_UID:-50000}:0"
+
+services:
+  airflow-init:
+    <<: *airflow-common
+    command: >
+        bash -c "
+        airflow db init &&
+        airflow users create --username airflow --password airflow --firstname Air --lastname Flow --role Admin --email airflow@example.com
+        " 
+    healthcheck:
+      test: ["CMD", "airflow", "db", "check"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: "no"
+
+  airflow-webserver:
+    <<: *airflow-common
+    ports:
+      - "8080:8080"
+    command: webserver
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    depends_on:
+      airflow-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "airflow", "jobs", "check", "--job-type", "SchedulerJob", "--hostname", "$${HOSTNAME}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+

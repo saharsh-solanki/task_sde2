@@ -1,0 +1,10 @@
+asin,return_reason,count
+FASH-001,Size mismatch,4
+FASH-001,Color mismatch,2
+FASH-001,Defective product,1
+FASH-002,Size mismatch,3
+FASH-002,Not as described,2
+FASH-002,Defective product,1
+FASH-003,Size mismatch,2
+FASH-003,Defective product,3
+FASH-003,Not as described,1

@@ -1,0 +1,36 @@
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+.venv/
+env/
+venv/
+.env
+
+# Logs
+logs/
+airflow/
+airflow_logs/
+outputs/
+*.log
+
+# Airflow DB and local files
+airflow/db/
+airflow_logs/
+airflow/logs/
+airflow/airflow.cfg
+airflow/unittests.cfg
+*.airflow
+*.db
+*.sqlite
+.ipynb_checkpoints/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Docker files
+*.pid
+*.sock
+

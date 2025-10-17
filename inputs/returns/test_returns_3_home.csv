@@ -1,0 +1,9 @@
+asin,return_reason,count
+HOME-001,Defective product,2
+HOME-001,Not as described,1
+HOME-001,Late delivery,1
+HOME-002,Defective product,1
+HOME-002,Not as described,2
+HOME-003,Defective product,1
+HOME-003,Too noisy,2
+HOME-003,Not as described,1

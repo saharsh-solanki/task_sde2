@@ -1,0 +1,9 @@
+asin,return_reason,count
+ELEC-001,Defective product,2
+ELEC-001,Not as described,1
+ELEC-001,Size mismatch,1
+ELEC-002,Color mismatch,3
+ELEC-002,Defective product,1
+ELEC-003,Battery issues,2
+ELEC-003,Not waterproof,1
+ELEC-003,Defective product,1

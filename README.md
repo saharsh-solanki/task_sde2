@@ -30,6 +30,7 @@ This uses airflow to run the pipelines.
    cd sde2_task
    ```
 2. **Setup project**
+   <br/>
    Please run the below cmd to automatically set up the project (Make sure Docker is up and running before running the cmd).   
    ```bash
    ./build.sh

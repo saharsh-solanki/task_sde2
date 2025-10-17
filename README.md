@@ -311,5 +311,5 @@ TEST-001,1,50,2500,100
 TEST-002,1,25,1250,50" > inputs/sales/sde2_sales.csv
 ```  
 
-**Last Updated**: October 16, 2025  
+**Last Updated**: October 17, 2025  
 **Status**: Production Ready

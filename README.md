@@ -65,7 +65,7 @@ If you prefer manual setup:
    ```
 
 4. **Start services:**
-5. <br/>
+    <br/>
    Before start the services please make sure your docker daemon is running.
    ```bash
    sudo docker compose up -d
